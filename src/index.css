@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Prevent text selection on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+/* Optimize scrolling */
+html {
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  background: linear-gradient(-45deg, #1a1c2c, #2d3436, #130f40, #30336b);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  min-height: 100vh;
+  overscroll-behavior-y: none;
+}
+
+/* Add some floating shapes in the background */
+.background-shapes::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 100%),
+    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 100%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Improve touch targets */
+button, 
+input, 
+select {
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+/* Safe area insets for modern iOS devices */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: min(0vw, env(safe-area-inset-left));
+    padding-right: min(0vw, env(safe-area-inset-right));
+    padding-top: min(0vh, env(safe-area-inset-top));
+    padding-bottom: min(0vh, env(safe-area-inset-bottom));
+  }
+}
